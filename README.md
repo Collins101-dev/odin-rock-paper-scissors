@@ -16,7 +16,7 @@ A simple implementation of the classic "Rock, Paper, Scissors" game built with J
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/odin-rock-paper-scissors.git
+    git clone https://github.com/Collins101-dev/odin-rock-paper-scissors.git
     ```
 2. Navigate to the project directory:
     ```bash
