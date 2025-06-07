@@ -1,5 +1,5 @@
 function getComputerChoice() {
-    let choice = Math.random();
+    let choice = Math.random ();
 
     if (choice < 0.3) {
         return "rock";
@@ -31,7 +31,7 @@ function playRound(humanChoice, computerChoice) {
     } else if (computerChoice === "rock" && humanChoice === "scissors") {
         console.log("You lose. Rock beats scissors.");
         computerScore++;
-    } else if (computerChoice === "paper" && humanChoice === "rock") {
+    // } else if (computerChoice === "paper" && humanChoice === "rock") {
         console.log("You lose. Paper beats rock.");
         computerScore++;
     } else if (computerChoice === "scissors" && humanChoice === "paper") {
@@ -44,20 +44,56 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-function playGame() {
-    for (let i = 0; i < 5; i++) {
-        let humanSelection = getHumanChoice();
-        let computerSelection = getComputerChoice();
-        playRound(humanSelection, computerSelection);
-    }
 
-    if (humanScore > computerScore) {
-        console.log(`Congrats! You win with a score of ${humanScore}.`);
-    } else if (computerScore > humanScore) {
-        console.log(`Sorry. You lose to the computer's score of ${computerScore}.`);
-    } else {
-        console.log("It's a tie game!");
-    }
-}
+window.onload = () => {
+    const buttons = document.createElement("div");
+    const button1 = document.createElement("button");
+    const button2 = document.createElement("button");
+    const button3= document.createElement("button");
 
-playGame();
+    buttons.style.display = "flex";
+    buttons.style.justifyContent = "center";
+    buttons.style.alignItems = "center";
+    buttons.style.gap = "20px"
+    buttons.style.height = "200px";
+
+    [button1, button2, button3].forEach(button => {
+        button.style.width = "120px";
+        button.style.height = "60px";
+        button.style.fontSize = "20px";
+    });
+
+    button1.textContent = "Rock";
+    button2.textContent = "Paper";
+    button3.textContent = "Scissors";
+
+
+
+
+
+
+
+
+
+    buttons.append(button1, button2, button3)
+    document.body.appendChild(buttons)
+};
+
+
+// function playGame() {
+//     for (let i = 0; i < 5; i++) {
+//         let humanSelection = getHumanChoice();
+//         let computerSelection = getComputerChoice();
+//         playRound(humanSelection, computerSelection);
+//     }
+//
+//     if (humanScore > computerScore) {
+//         console.log(`Congrats! You win with a score of ${humanScore}.`);
+//     } else if (computerScore > humanScore) {
+//         console.log(`Sorry. You lose to the computer's score of ${computerScore}.`);
+//     } else {
+//         console.log("It's a tie game!");
+//     }
+// }
+//
+// playGame();
