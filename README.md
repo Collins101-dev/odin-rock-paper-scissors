@@ -6,11 +6,15 @@ A simple implementation of the classic "Rock, Paper, Scissors" game built with J
 
 - Play a game of Rock, Paper, Scissors against the computer.
 - Randomized computer choices for a fair game.
-- Interactive gameplay via the browser console or UI (if implemented).
+- Interactive graphical user interface in the browser.
+- Dynamic score tracking and round results.
+- Option to restart the game after 5 rounds.
 
 ## Technologies Used
 
-- **JavaScript**: Core game logic.
+- **JavaScript**: Core game logic and DOM manipulation.
+- **HTML**: Page structure.
+- **CSS** (injected via JavaScript): Styling and layout.
 
 ## How to Play
 
@@ -22,8 +26,11 @@ A simple implementation of the classic "Rock, Paper, Scissors" game built with J
     ```bash
     cd odin-rock-paper-scissors
     ```
-3. Open `index.html` in your browser to play (if UI is implemented).  
-    Alternatively, open the browser console and follow the prompts to play.
+3. Open `index.html` in your browser.
+
+4. Use the on-screen buttons to select Rock, Paper, or Scissors.  
+   The game will display the results and keep score for 5 rounds.  
+   After 5 rounds, you can restart the game using the "Restart Game" button.
 
 ## Game Rules
 
@@ -34,12 +41,14 @@ A simple implementation of the classic "Rock, Paper, Scissors" game built with J
 ## Project Goals
 
 - Practice JavaScript fundamentals.
-- Learn how to implement game logic.
+- Learn how to implement game logic and DOM manipulation.
+- Enhance user experience with dynamic UI.
 
 ## Future Enhancements
 
-- Add a graphical user interface.
+- Add sound effects and animations.
 - Allow multiplayer functionality.
+- Improve accessibility and mobile responsiveness.
 
 ## Contributing
 
