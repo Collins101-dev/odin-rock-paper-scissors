@@ -2,6 +2,10 @@
 
 A simple implementation of the classic "Rock, Paper, Scissors" game built with JavaScript. This project is part of [The Odin Project](https://www.theodinproject.com/) curriculum.
 
+## Live Demo
+
+Try the game online: [Live Page](https://collins101-dev.github.io/odin-rock-paper-scissors/)
+
 ## Features
 
 - Play a game of Rock, Paper, Scissors against the computer.
