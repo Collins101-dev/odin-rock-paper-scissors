@@ -44,26 +44,58 @@ function playGame(humanSelection) {
 
     const computerSelection = getComputerChoice();
 
-    resultsDiv.innerHTML += `<p class="round"><strong>Round ${roundCount + 1}</strong></p>`;
-    resultsDiv.innerHTML += `<p class="choice">You chose: <span>${humanSelection}</span></p>`;
-    resultsDiv.innerHTML += `<p class="choice">Computer chose: <span>${computerSelection}</span></p>`;
+    // Create a round container for better grouping
+    const roundContainer = document.createElement("div");
+    roundContainer.className = "round-container";
+
+    roundContainer.innerHTML = `
+      <p class="round"><strong>Round ${roundCount + 1}</strong></p>
+      <p class="choice">You chose: <span>${humanSelection}</span></p>
+      <p class="choice">Computer chose: <span>${computerSelection}</span></p>
+    `;
+
+    resultsDiv.appendChild(roundContainer);
 
     playRound(humanSelection, computerSelection);
+
     roundCount++;
 
+    // Scroll results div to bottom smoothly so latest results are visible
+    resultsDiv.scrollTo({ top: resultsDiv.scrollHeight, behavior: 'smooth' });
+
     if (roundCount === 5) {
-        resultsDiv.innerHTML += `<p class="final-score">Final Score — You: ${humanScore} | Computer: ${computerScore}</p>`;
+        const finalScore = document.createElement("p");
+        finalScore.className = "final-score";
+        finalScore.textContent = `Final Score — You: ${humanScore} | Computer: ${computerScore}`;
+        resultsDiv.appendChild(finalScore);
+
+        const finalMessage = document.createElement("h3");
         if (humanScore > computerScore) {
-            resultsDiv.innerHTML += `<h3 class="final-win">🎉 Congrats! You win.</h3>`;
+            finalMessage.className = "final-win";
+            finalMessage.textContent = "🎉 Congrats! You win.";
         } else if (computerScore > humanScore) {
-            resultsDiv.innerHTML += `<h3 class="final-lose">😞 Sorry. You lose.</h3>`;
+            finalMessage.className = "final-lose";
+            finalMessage.textContent = "😞 Sorry. You lose.";
         } else {
-            resultsDiv.innerHTML += `<h3 class="final-tie">🤝 It's a tie!</h3>`;
+            finalMessage.className = "final-tie";
+            finalMessage.textContent = "🤝 It's a tie!";
         }
+        resultsDiv.appendChild(finalMessage);
+
+        restartButton.style.display = "inline-block";  // Show restart button when game ends
     }
 }
 
+function restartGame() {
+    humanScore = 0;
+    computerScore = 0;
+    roundCount = 0;
+    resultsDiv.innerHTML = "";
+    restartButton.style.display = "none"; // Hide restart button during the game
+}
+
 let resultsDiv;
+let restartButton;
 
 window.onload = () => {
     // Inject CSS styles dynamically
@@ -81,11 +113,22 @@ window.onload = () => {
         padding: 40px 20px;
       }
 
+      header {
+        font-size: 3rem;
+        font-weight: 900;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-bottom: 40px;
+        color: #f9fafb;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+        user-select: none;
+      }
+
       #buttons {
         display: flex;
         justify-content: center;
         gap: 25px;
-        margin-bottom: 40px;
+        margin-bottom: 30px;
       }
 
       button {
@@ -122,20 +165,38 @@ window.onload = () => {
         padding: 25px 30px;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         overflow-y: auto;
-        max-height: 400px;
+        max-height: 320px;
+        margin-bottom: 20px;
+        position: relative;
+      }
+
+      /* Fade effect at bottom to hint scroll */
+      #results::after {
+        content: "";
+        pointer-events: none;
+        position: sticky;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 40px;
+        background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.15));
+      }
+
+      .round-container {
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
       }
 
       #results p, #results h3 {
-        margin: 8px 0;
-        line-height: 1.4;
+        margin: 6px 0;
+        line-height: 1.3;
       }
 
       .round {
         font-weight: 700;
-        font-size: 20px;
-        margin-top: 18px;
-        border-bottom: 2px solid #fff;
-        padding-bottom: 4px;
+        font-size: 18px;
+        margin-bottom: 4px;
       }
 
       .choice span {
@@ -187,8 +248,32 @@ window.onload = () => {
         color: #fbbf24;
         margin-top: 15px;
       }
+
+      #restart {
+        background: #764ba2;
+        color: #fff;
+        font-weight: 700;
+        padding: 14px 40px;
+        border-radius: 14px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+        cursor: pointer;
+        user-select: none;
+        font-size: 18px;
+        border: none;
+        display: none;
+        transition: background 0.3s ease;
+      }
+
+      #restart:hover {
+        background: #5a3a81;
+      }
     `;
     document.head.appendChild(style);
+
+    // Add header
+    const header = document.createElement("header");
+    header.textContent = "Rock Paper Scissors";
+    document.body.prepend(header);
 
     // Create buttons container
     const buttons = document.createElement("div");
@@ -208,4 +293,11 @@ window.onload = () => {
     resultsDiv = document.createElement("div");
     resultsDiv.id = "results";
     document.body.appendChild(resultsDiv);
+
+    // Create restart button
+    restartButton = document.createElement("button");
+    restartButton.id = "restart";
+    restartButton.textContent = "Restart Game";
+    restartButton.addEventListener("click", restartGame);
+    document.body.appendChild(restartButton);
 };
